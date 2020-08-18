@@ -14,6 +14,11 @@ type User{
     createdAt:Float!
 }
 
+type UpdateAvatar{
+    status:Boolean
+    urlAvatar:String
+}
+
 input UserInput{
     name:String!
     username:String!
@@ -24,13 +29,16 @@ input UserInput{
 
 type Query{
     # User Query
-    getUser:[User!]
+    getUsers:[User!]
+    getUser(id:ID,username:String):User
 }
 
 type Mutation{
     #User Mutation
     register(input:UserInput!):ResultUser!
     login(input:LoginInput!):ResultToken!
+    updateAvatar(file:Upload):UpdateAvatar
+    deleteAvatar:Boolean
 }
 
 input LoginInput{

@@ -1,6 +1,8 @@
 const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const { compareSync } = require('bcrypt');
+const { ApolloError } = require('apollo-server');
+const awsUploadImage = require('../utils/aws-upload-image');
 
 
 async function register(input) {
@@ -55,6 +57,16 @@ async function getUsers() {
     return users;
 }
 
+
+async function getUser(id, username) {
+    let user = null;
+    /* ojo enfocarlo en lo que deseas al final solo enviar uno a la vez */
+    if (id) user = await User.findById(id);
+    if (username) user = await User.findOne({ username });
+    if (!user) throw new ApolloError('El usuario no existe', 404);
+    return user;
+}
+
 async function login(input) {
     const { email, password } = input;
     const userFind = await User.findOne({ email: email.toLowerCase() });
@@ -102,8 +114,48 @@ async function login(input) {
 }
 
 
+async function updateAvatar(file, ctx) {
+    const { id } = ctx.user;
+    //devuelve una promesa
+    const { mimetype, createReadStream } = await file;
+    const ext = mimetype.split('/')[1];
+    const imageName = `avatar/${id}.${ext}`;
+    const fileData = createReadStream();
+
+    try {
+        const result = await awsUploadImage(fileData, imageName);
+        await User.findByIdAndUpdate(id, { avatar: result });
+        return {
+            status: true,
+            urlAvatar: result
+        }
+    } catch (error) {
+        console.log(error.message);
+
+        return {
+            status: false,
+            urlAvatar: null
+        }
+    }
+}
+
+async function deleteAvatar(ctx) {
+    const { id } = ctx.user;
+    try {
+        await User.findByIdAndUpdate(id, { avatar: "" });
+        return true;
+    } catch (error) {
+        console.log(error.message);
+        return false;
+    }
+}
+
+
 module.exports = {
     register,
     getUsers,
-    login
+    getUser,
+    login,
+    updateAvatar,
+    deleteAvatar
 }
