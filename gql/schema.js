@@ -27,6 +27,15 @@ input UserInput{
     password:String!
 }
 
+input UserUpdateInput{
+    name:String
+    email:String
+    currentPassword:String
+    newPassword:String
+    siteWeb:String
+    description:String
+}
+
 type Query{
     # User Query
     getUsers:[User!]
@@ -39,6 +48,7 @@ type Mutation{
     login(input:LoginInput!):ResultToken!
     updateAvatar(file:Upload):UpdateAvatar
     deleteAvatar:Boolean
+    updateUser(input:UserUpdateInput):Boolean
 }
 
 input LoginInput{

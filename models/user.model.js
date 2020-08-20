@@ -52,4 +52,19 @@ userSchema.pre('save', function(next) {
     next();
 });
 
+userSchema.pre("findOneAndUpdate", async function(next) {
+    const password = await this.getUpdate().password;
+    if (!password) {
+        return next();
+    }
+    try {
+        const salt = genSaltSync(10);
+        const hash = hashSync(password, salt);
+        this.getUpdate().password = hash;
+        next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
 module.exports = model('user', userSchema);

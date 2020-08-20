@@ -21,6 +21,9 @@ const resolvers = {
         },
         async deleteAvatar(_, __, ctx) {
             return userController.deleteAvatar(ctx);
+        },
+        async updateUser(_, { input }, ctx) {
+            return userController.updateUser(input, ctx);
         }
     }
 }

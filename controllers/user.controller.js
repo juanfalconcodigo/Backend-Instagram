@@ -150,6 +150,24 @@ async function deleteAvatar(ctx) {
     }
 }
 
+async function updateUser(input, ctx) {
+    const { id } = ctx.user;
+    try {
+        if (input.currentPassword && input.newPassword) {
+            const userFind = await User.findById(id);
+            const passwordSuccess = await compareSync(input.currentPassword, userFind.password);
+            if (!passwordSuccess) throw new Error("Contraseña incorrecta");
+            await User.findByIdAndUpdate(id, { password: input.newPassword });
+        } else {
+            await User.findByIdAndUpdate(id, input);
+        }
+        return true;
+    } catch (error) {
+        console.log(error.message);
+        return false
+    }
+
+}
 
 module.exports = {
     register,
@@ -157,5 +175,6 @@ module.exports = {
     getUser,
     login,
     updateAvatar,
-    deleteAvatar
+    deleteAvatar,
+    updateUser
 }

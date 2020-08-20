@@ -29,7 +29,7 @@ function server() {
                     };
                 } catch (error) {
                     console.log("#### ERROR ####");
-                    console.log(error);
+                    console.log(error.message);
                     throw new Error("Token invalido");
                 }
             }
