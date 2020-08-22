@@ -7,6 +7,9 @@ const resolvers = {
         },
         async getUser(_, { id, username }) {
             return userController.getUser(id, username);
+        },
+        async search(_, { search }) {
+            return userController.search(search);
         }
     },
     Mutation: {

@@ -169,6 +169,13 @@ async function updateUser(input, ctx) {
 
 }
 
+
+async function search(search) {
+    /*  const regex = new RegExp(search, 'i'); */ //le pasabas el regex
+    const users = await User.find({ name: { $regex: search, $options: 'i' } });
+    return users;
+}
+
 module.exports = {
     register,
     getUsers,
@@ -176,5 +183,6 @@ module.exports = {
     login,
     updateAvatar,
     deleteAvatar,
-    updateUser
+    updateUser,
+    search
 }

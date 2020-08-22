@@ -40,6 +40,7 @@ type Query{
     # User Query
     getUsers:[User!]
     getUser(id:ID,username:String):User
+    search(search:String):[User]
 }
 
 type Mutation{
