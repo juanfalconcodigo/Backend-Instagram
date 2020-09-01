@@ -14,6 +14,18 @@ type User{
     createdAt:Float!
 }
 
+type Publication{
+    id:ID!
+    idUser:ID!
+    file:String!
+    typeFile:String!
+    createdAt:Float!
+}
+
+type Public{
+    status:Boolean
+    urlPublish:String
+}
 type UpdateAvatar{
     status:Boolean
     urlAvatar:String
@@ -44,6 +56,8 @@ type Query{
     isFollow(username:String!):Boolean
     getFollowers(username:String!):[User]
     getFolloweds(username:String!):[User]
+    #Publication
+    getPublications(username:String):[Publication!]
 }
 
 type Mutation{
@@ -56,6 +70,8 @@ type Mutation{
     #Follow
     follow(username:String!):Boolean
     unFollow(username:String!):Boolean
+    #Publication
+    publish(file:Upload):Public
 }
 
 input LoginInput{
