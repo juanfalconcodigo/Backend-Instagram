@@ -31,6 +31,13 @@ type UpdateAvatar{
     urlAvatar:String
 }
 
+type Comment{
+    idUser:User!
+    idPublication:String!
+    comment:String!
+    createdAt:Float!
+}
+
 input UserInput{
     name:String!
     username:String!
@@ -58,6 +65,8 @@ type Query{
     getFolloweds(username:String!):[User]
     #Publication
     getPublications(username:String):[Publication!]
+    #getComment
+    getComments(idPublication:ID!):[Comment!]
 }
 
 type Mutation{
@@ -72,6 +81,8 @@ type Mutation{
     unFollow(username:String!):Boolean
     #Publication
     publish(file:Upload):Public
+    #Comment
+    postComment(comment:String!,idPublication:ID!):Comment
 }
 
 input LoginInput{
