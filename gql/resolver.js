@@ -1,4 +1,4 @@
-const { commentController, followController, publicationController, userController } = require('../controllers');
+const { commentController, followController, publicationController, userController, likeController } = require('../controllers');
 
 const resolvers = {
     Query: {
@@ -25,6 +25,18 @@ const resolvers = {
         },
         async getComments(_, { idPublication }) {
             return commentController.getComments(idPublication);
+        },
+        async isLike(_, { idPublication }, ctx) {
+            return likeController.isLike(idPublication, ctx);
+        },
+        async countLikes(_, { idPublication }) {
+            return likeController.countLikes(idPublication);
+        },
+        async getPublicationsFolloweds(_, __, ctx) {
+            return publicationController.getPublicationsFolloweds(ctx);
+        },
+        async getNotFolloweds(_, __, ctx) {
+            return followController.getNotFolloweds(ctx);
         }
     },
     Mutation: {
@@ -54,6 +66,12 @@ const resolvers = {
         },
         async postComment(_, { comment, idPublication }, ctx) {
             return commentController.postComment(comment, idPublication, ctx)
+        },
+        async postLike(_, { idPublication }, ctx) {
+            return likeController.postLike(idPublication, ctx);
+        },
+        async deleteLike(_, { idPublication }, ctx) {
+            return likeController.deleteLike(idPublication, ctx);
         }
     }
 }

@@ -55,6 +55,14 @@ input UserUpdateInput{
     description:String
 }
 
+type FeedPublication{
+    id:ID!
+    idUser:User!
+    file:String!
+    typeFile:String!
+    createdAt:Float!
+}
+
 type Query{
     # User Query
     getUsers:[User!]
@@ -63,10 +71,15 @@ type Query{
     isFollow(username:String!):Boolean
     getFollowers(username:String!):[User]
     getFolloweds(username:String!):[User]
+    getNotFolloweds:[User!]
     #Publication
     getPublications(username:String):[Publication!]
+    getPublicationsFolloweds:[FeedPublication!]
     #getComment
     getComments(idPublication:ID!):[Comment!]
+    #getIsLike
+    isLike(idPublication:ID!):Boolean
+    countLikes(idPublication:ID!):Int
 }
 
 type Mutation{
@@ -83,6 +96,11 @@ type Mutation{
     publish(file:Upload):Public
     #Comment
     postComment(comment:String!,idPublication:ID!):Comment
+    #Like
+    """Added like"""
+    postLike(idPublication:ID!):Boolean
+    """Delete like"""
+    deleteLike(idPublication:ID!):Boolean
 }
 
 input LoginInput{
