@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
-const awsUploadImage = require("../utils/aws-upload-image");
-const { Publication, User, Follow } = require('../models');
+const { awsUploadImage, awsDeleteImage } = require("../utils/aws-upload-image");
+const { Publication, User, Follow, Comment, Like } = require('../models');
 async function publish(file, ctx) {
     const { id } = ctx.user;
     const { createReadStream, mimetype } = await file;
@@ -63,8 +63,30 @@ async function getPublicationsFolloweds(ctx) {
     return result;
 }
 
+
+
+async function deletePublication(idPublication, ctx) {
+    const { user } = ctx;
+    try {
+        const findPublicationUser = await Publication.findOne({ _id: idPublication }).where('idUser').equals(user.id);
+        if (!findPublicationUser) {
+            return false;
+        }
+        const imagePath = findPublicationUser.file.split("/publication/")[1];
+        await awsDeleteImage(imagePath);
+        await Publication.findByIdAndRemove(findPublicationUser._id);
+        await Comment.deleteMany({ idPublication });
+        await Like.deleteMany({ idPublication });
+        return true;
+    } catch (error) {
+        console.log(error.message);
+        return false
+    }
+}
+
 module.exports = {
     publish,
+    deletePublication,
     getPublications,
     getPublicationsFolloweds
 }

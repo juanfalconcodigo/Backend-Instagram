@@ -64,6 +64,9 @@ const resolvers = {
         async publish(_, { file }, ctx) {
             return publicationController.publish(file, ctx);
         },
+        async deletePublication(_, { idPublication }, ctx) {
+            return publicationController.deletePublication(idPublication, ctx);
+        },
         async postComment(_, { comment, idPublication }, ctx) {
             return commentController.postComment(comment, idPublication, ctx)
         },

@@ -26,4 +26,22 @@ const awsUploadImage = async(file, filePath) => {
 
 }
 
-module.exports = awsUploadImage;
+const awsDeleteImage = async(filePath) => {
+    const params = {
+        Bucket: AWS_BUCKET_NAME,
+        Key: `publication/${filePath}`
+    };
+    try {
+        await s3.deleteObject(params).promise();
+        return true;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+
+module.exports = {
+    awsUploadImage,
+    awsDeleteImage
+};

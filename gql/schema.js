@@ -94,6 +94,7 @@ type Mutation{
     unFollow(username:String!):Boolean
     #Publication
     publish(file:Upload):Public
+    deletePublication(idPublication:ID!):Boolean
     #Comment
     postComment(comment:String!,idPublication:ID!):Comment
     #Like
