@@ -1,5 +1,5 @@
 const { likeController } = require(".");
-const { Like } = require("../models");
+const { Like } = require("../models/index");
 
 
 async function postLike(idPublication, ctx) {

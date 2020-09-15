@@ -1,4 +1,4 @@
-const { User, Follow } = require("../models")
+const { User, Follow } = require("../models/index")
 
 async function follow(username, ctx) {
     //falta validar que solo siga a 1
