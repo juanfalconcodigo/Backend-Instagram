@@ -1,5 +1,4 @@
-const { User, Publication } = require("../models/index");
-const Comment = require('../models/comment.model');
+const { User, Publication, Comment } = require("../models/index");
 const { GraphQLError } = require('graphql');
 
 async function postComment(comment, idPublication, ctx) {

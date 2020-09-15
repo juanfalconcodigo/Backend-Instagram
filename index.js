@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./gql/schema');
-const resolvers = require('./gql/resolver');
+const typeDefs = require('./src/gql/schema');
+const resolvers = require('./src/gql/resolver');
 require('dotenv').config({ path: '.env' });
 
 mongoose.connect(process.env.BBDD, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }).
@@ -29,15 +29,15 @@ function server() {
                     };
                 } catch (error) {
                     console.log("#### ERROR ####");
-                    /*  console.log(error.message); */
+                    console.log(error.message);
                     throw new Error("Token invalido");
                 }
             }
         },
     });
     server.listen({ port: process.env.PORT || 4004 }).then(({ url }) => {
-        /*  console.log('##########################################');
-         console.log(`Server apollo On : ${url}`);
-         console.log('##########################################'); */
+        console.log('##########################################');
+        console.log(`Server apollo On : ${url}`);
+        console.log('##########################################');
     });
 }

@@ -2,7 +2,7 @@ const { User } = require('../models/index');
 const jwt = require('jsonwebtoken');
 const { compareSync } = require('bcrypt');
 const { ApolloError } = require('apollo-server');
-const { awsUploadImage } = require('../utils/aws-upload-image');
+const { awsUploadImage } = require('../../utils/aws-upload-image');
 
 
 async function register(input) {
