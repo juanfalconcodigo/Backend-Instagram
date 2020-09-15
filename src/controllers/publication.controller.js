@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { awsUploadImage, awsDeleteImage } = require("../../utils/aws-upload-image");
+const { awsUploadImage, awsDeleteImage } = require("../utils/aws-upload-image");
 const { Publication, User, Follow, Comment, Like } = require('../models/index');
 async function publish(file, ctx) {
     const { id } = ctx.user;
