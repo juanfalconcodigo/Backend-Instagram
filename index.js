@@ -35,7 +35,7 @@ function server() {
             }
         },
     });
-    server.listen(4004).then(({ url }) => {
+    server.listen({ port: process.env.PORT || 4004 }).then(({ url }) => {
         console.log('##########################################');
         console.log(`Server apollo On : ${url}`);
         console.log('##########################################');
