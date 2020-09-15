@@ -29,15 +29,15 @@ function server() {
                     };
                 } catch (error) {
                     console.log("#### ERROR ####");
-                    console.log(error.message);
+                    /*  console.log(error.message); */
                     throw new Error("Token invalido");
                 }
             }
         },
     });
     server.listen({ port: process.env.PORT || 4004 }).then(({ url }) => {
-        console.log('##########################################');
-        console.log(`Server apollo On : ${url}`);
-        console.log('##########################################');
+        /*  console.log('##########################################');
+         console.log(`Server apollo On : ${url}`);
+         console.log('##########################################'); */
     });
 }
