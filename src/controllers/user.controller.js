@@ -172,7 +172,7 @@ async function updateUser(input, ctx) {
 
 async function search(search) {
     /*  const regex = new RegExp(search, 'i'); */ //le pasabas el regex
-    const users = await User.find({ name: { $regex: search, $options: 'i' } });
+    const users = await User.find({ name: { $regex: search, $options: 'i' } }).limit(5);
     return users;
 }
 

@@ -19,11 +19,11 @@
     "license": "MIT",
     "dependencies": {
         "apollo-server": "^2.17.0",
-        "aws-sdk": "^2.752.0",
+        "aws-sdk": "^2.756.0",
         "bcrypt": "^5.0.0",
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.10.5",
+        "mongoose": "^5.10.6",
         "uuid": "^8.3.0"
     },
     "devDependencies": {
