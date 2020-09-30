@@ -9,7 +9,7 @@
         "dev": "nodemon ./src/index.js"
     },
     "engines": {
-        "node": "12.18.3"
+        "node": "12.18.4"
     },
     "keywords": [
         "graphql",
@@ -18,12 +18,15 @@
     "author": "Juan Falcón",
     "license": "MIT",
     "dependencies": {
-        "apollo-server": "^2.17.0",
-        "aws-sdk": "^2.756.0",
+        "apollo-server-express": "^2.18.1",
+        "aws-sdk": "^2.763.0",
         "bcrypt": "^5.0.0",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
+        "graphql-playground-middleware-express": "^1.7.21",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.10.6",
+        "mongoose": "^5.10.7",
         "uuid": "^8.3.0"
     },
     "devDependencies": {

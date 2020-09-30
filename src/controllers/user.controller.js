@@ -1,7 +1,7 @@
 const { User } = require('../models/index');
 const jwt = require('jsonwebtoken');
 const { compareSync } = require('bcrypt');
-const { ApolloError } = require('apollo-server');
+const { ApolloError } = require('apollo-server-express');
 const { awsUploadImage } = require('../utils/aws-upload-image');
 
 
